@@ -39,7 +39,7 @@ __doc__ = """
 """
 
 # path_to_cplex = r'C:\Program Files\IBM\ILOG\CPLEX_Studio128\cplex\bin\x64_win64\cplex.exe'
-path_to_gurobi = r'C:\gurobi1001\win64'
+# path_to_gurobi = r'C:\gurobi1001\win64'
 import os
 import datetime as dt
 import logging
@@ -53,7 +53,7 @@ import time
 # solver = pulp.PULP_CBC_CMD
 # solver = pulp.CPLEX(path=path_to_cplex)
 # ['GLPK_CMD', 'CPLEX_CMD', 'CPLEX_PY', 'GUROBI', 'GUROBI_CMD', 'PULP_CBC_CMD', 'COIN_CMD', 'PULP_CHOCO_CMD']
-solver = pulp.GUROBI(path = path_to_gurobi)
+# solver = pulp.GUROBI(path = path_to_gurobi)
 logging.basicConfig(level=logging.DEBUG)
 logging.info(f"\t{dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\tOSeMOSYS-PuLP-HP started.")
 time_now = int(time.time())
@@ -1542,8 +1542,8 @@ while i <= n:
     #    SOLVE
     # ------------------------------------------------------------------------------------------------------------------
     #
-    # model.solve()
-    model.solve(solver)
+    model.solve()
+    # model.solve(solver)
     logging.info(f"\t{dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t"
                  f"Model is solved. Solution is: "
                  f"{pulp.LpStatus[model.status]}")
