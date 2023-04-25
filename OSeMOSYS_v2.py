@@ -258,7 +258,9 @@ def saveResultsTemporary(_model, _scenario_i):
     df = pd.concat([df, cost_df])
 
     # All other variables
-    res = tuple([v for v in _model.variables() if v.name != "Cost" and v.name != "__dummy"])
+    # res = tuple([v for v in _model.variables() if v.name != "Cost" and v.name != "__dummy"])
+    res = tuple([v for v in _model.variables() if v.name.startswith("ProductionByTechnology")])
+
     other_df = pd.DataFrame(data={'NAME': [v.name.split('_')[0] for v in res],
                                   'VALUE': [v.value() for v in res],
                                   'INDICES': [variables[str(v.name.split('_')[0])]['indices'] for v in res],
