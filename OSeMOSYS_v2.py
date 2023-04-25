@@ -63,8 +63,8 @@ time_now = int(time.time())
 
 # Input data
 # inputFile = "Master_Input_Model.xlsx"
-inputFile = "Final_Input_Sheet_24.xlsx"  # Update with actual filename
-inputDir = "C:/Users/Enzo/OneDrive - The Institute of Sustainable Energy Stichting/Modelling/input"
+inputFile = "Final_Input_Sheet.xlsx"  # Update with actual filename
+inputDir = ""
 modelName = inputFile.split('.')[0]
 sheetSets = "SETS"
 sheetParams = "PARAMETERS"
