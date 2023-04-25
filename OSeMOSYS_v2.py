@@ -47,7 +47,7 @@ import numpy as np
 import pandas as pd
 import itertools
 import pulp
-import gurobipy
+# import gurobipy
 import time
 
 # solver = pulp.PULP_CBC_CMD
