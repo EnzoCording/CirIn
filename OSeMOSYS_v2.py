@@ -71,7 +71,7 @@ sheetParams = "PARAMETERS"
 sheetParamsDefault = "PARAMETERS_DEFAULT"
 sheetMcs = "MCS"
 sheetMcsNum = "MCS_num"
-outputDir = "\Output_Data"
+outputDir = "Output_Data"
 
 # Output data
 save_as_csv = True  # True: Output data will be saved as CSV file; False: No saving. Note: Rapid process.
