@@ -39,7 +39,7 @@ __doc__ = """
 """
 
 # path_to_cplex = r'C:\Program Files\IBM\ILOG\CPLEX_Studio128\cplex\bin\x64_win64\cplex.exe'
-# path_to_gurobi = r'C:\gurobi1001\win64'
+path_to_gurobi = r'C:\gurobi1001\win64'
 import os
 import datetime as dt
 import logging
@@ -47,13 +47,13 @@ import numpy as np
 import pandas as pd
 import itertools
 import pulp
-# import gurobipy
+import gurobipy
 import time
 
 # solver = pulp.PULP_CBC_CMD
 # solver = pulp.CPLEX(path=path_to_cplex)
 # ['GLPK_CMD', 'CPLEX_CMD', 'CPLEX_PY', 'GUROBI', 'GUROBI_CMD', 'PULP_CBC_CMD', 'COIN_CMD', 'PULP_CHOCO_CMD']
-# solver = pulp.GUROBI(path = path_to_gurobi)
+solver = pulp.GUROBI(path = path_to_gurobi, msg=True)
 logging.basicConfig(level=logging.DEBUG)
 logging.info(f"\t{dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\tOSeMOSYS-PuLP-HP started.")
 time_now = int(time.time())
@@ -63,15 +63,15 @@ time_now = int(time.time())
 
 # Input data
 # inputFile = "Master_Input_Model.xlsx"
-inputFile = "Final_Input_Sheet.xlsx"  # Update with actual filename
-inputDir = ""
+inputFile = "Final_12_days_model.xlsx"  # Update with actual filename
+inputDir = "C:/Users/Enzo/OneDrive - The Institute of Sustainable Energy Stichting/Modelling/input"
 modelName = inputFile.split('.')[0]
 sheetSets = "SETS"
 sheetParams = "PARAMETERS"
 sheetParamsDefault = "PARAMETERS_DEFAULT"
 sheetMcs = "MCS"
 sheetMcsNum = "MCS_num"
-outputDir = "./Output_Data"
+outputDir = ".\Output_Data\\"
 
 # Output data
 save_as_csv = True  # True: Output data will be saved as CSV file; False: No saving. Note: Rapid process.
@@ -258,9 +258,7 @@ def saveResultsTemporary(_model, _scenario_i):
     df = pd.concat([df, cost_df])
 
     # All other variables
-    # res = tuple([v for v in _model.variables() if v.name != "Cost" and v.name != "__dummy"])
     res = tuple([v for v in _model.variables() if v.name.startswith("ProductionByTechnology")])
-
     other_df = pd.DataFrame(data={'NAME': [v.name.split('_')[0] for v in res],
                                   'VALUE': [v.value() for v in res],
                                   'INDICES': [variables[str(v.name.split('_')[0])]['indices'] for v in res],
@@ -1544,8 +1542,8 @@ while i <= n:
     #    SOLVE
     # ------------------------------------------------------------------------------------------------------------------
     #
-    model.solve()
-    # model.solve(solver)
+    # model.solve()
+    model.solve(solver)
     logging.info(f"\t{dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\t"
                  f"Model is solved. Solution is: "
                  f"{pulp.LpStatus[model.status]}")
